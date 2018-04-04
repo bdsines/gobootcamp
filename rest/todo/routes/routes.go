@@ -32,4 +32,10 @@ var routes = Routes{
 		"/todos/{todoId}",
 		handlers.ShowTodo,
 	},
+	Route{
+		"CreateTodo",
+		"POST",
+		"/todos",
+		handlers.TodoCreate,
+	},
 }
