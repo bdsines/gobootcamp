@@ -17,6 +17,7 @@ func init() {
 func CreateTodo(t Todo) Todo {
 	currentID += 1
 	t.Id = currentID
+
 	todos = append(todos, t)
 	return t
 
