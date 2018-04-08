@@ -17,8 +17,8 @@ var routes = Routes{
 	Route{
 		"Index",
 		"GET",
-		"/",
-		handlers.Index,
+		"/hello",
+		handlers.Hello,
 	},
 	Route{
 		"ToDoIndex",
@@ -37,5 +37,17 @@ var routes = Routes{
 		"POST",
 		"/todos",
 		handlers.TodoCreate,
+	},
+	Route{
+		"UpdateToDo",
+		"PUT",
+		"/todos",
+		handlers.UpdateTodo,
+	},
+	Route{
+		"DeleteTodo",
+		"DELETE",
+		"/todos/{todoId}",
+		handlers.DeleteTodo,
 	},
 }
