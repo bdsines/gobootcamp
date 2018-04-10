@@ -89,15 +89,16 @@ func DeleteTodo(id int) error {
 	// return fmt.Errorf("Could not find Todo with ID: %d", id)
 }
 
-func UpdateTodo(t Todo) (Todo, error) {
+func UpdateTodo(t Todo) error {
 
 	// todos = append(todos, t)
 	err := db.C(COLLECTION).Find(bson.M{"id": t.Id}).One(&todo)
 
 	if err != nil {
-		return t, fmt.Errorf("Could not find Todo with ID: %d", t.Id)
+		// return t, fmt.Errorf("Could not find Todo with ID: %d", t.Id)
+		return fmt.Errorf("Could not find Todo with ID: %d", t.Id)
 	}
-	err = db.C(COLLECTION).UpdateId(todo.Id, &t)
-	return t, err
+	err = db.C(COLLECTION).Update(bson.M{"id": todo.Id}, &t)
+	return err
 
 }
