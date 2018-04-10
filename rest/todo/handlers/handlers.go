@@ -72,18 +72,21 @@ func UpdateTodo(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
 	if err != nil {
 		panic(err)
-	}
-	if err := json.Unmarshal(body, &todo); err != nil {
 		respondWithError(w, http.StatusBadRequest, " Bad Payload")
 		return
 	}
-	t, err := repos.UpdateTodo(todo)
+	if err := json.Unmarshal(body, &todo); err != nil {
+		panic(err)
+		respondWithError(w, http.StatusBadRequest, " Bad Payload")
+		return
+	}
+	err = repos.UpdateTodo(todo)
 	if err != nil {
 		panic(err)
 		respondWithError(w, http.StatusBadRequest, " Failed to Update")
 		return
 	}
-	respondWithJson(w, http.StatusOK, t)
+	respondWithJson(w, http.StatusOK, err)
 }
 func DeleteTodo(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
